@@ -1,0 +1,117 @@
+2021-05-27 22:52:49, INFO:SimpleCV:external parameter: ['train.save_ckpt_interval_epoch', '9999']
+2021-05-27 22:52:49, INFO:SimpleCV:[trainable params] 166/166
+2021-05-27 22:52:49, INFO:SimpleCV:#params: 2078959, 2.079 M
+2021-05-27 22:52:49, INFO:SimpleCV:batch_size_per_gpu = 1
+2021-05-27 22:52:49, INFO:SimpleCV:use 1 forward and 1 backward mode.
+2021-05-27 22:52:49, INFO:SimpleCV:num_epochs ~= 60.0
+2021-05-27 22:52:49, INFO:SimpleCV:num_iters = 600
+2021-05-27 22:52:52, INFO:SimpleCV:total_loss = 0.237907, cls_loss = 0.237907, lr = 0.005, step: 1, (3.175 sec / step, data: 0.222 sec, eta: 00:31:41)
+2021-05-27 22:52:53, INFO:SimpleCV:total_loss = 0.237447, cls_loss = 0.237447, lr = 0.004993, step: 2, (1.925 sec / step, data: 0.111 sec, eta: 00:19:11)
+2021-05-27 22:52:54, INFO:SimpleCV:total_loss = 0.236754, cls_loss = 0.236754, lr = 0.004987, step: 3, (1.484 sec / step, data: 0.074 sec, eta: 00:14:45)
+2021-05-27 22:52:54, INFO:SimpleCV:total_loss = 0.235905, cls_loss = 0.235905, lr = 0.00498, step: 4, (1.262 sec / step, data: 0.056 sec, eta: 00:12:32)
+2021-05-27 22:52:55, INFO:SimpleCV:total_loss = 0.234938, cls_loss = 0.234938, lr = 0.004973, step: 5, (1.127 sec / step, data: 0.045 sec, eta: 00:11:10)
+2021-05-27 22:52:55, INFO:SimpleCV:total_loss = 0.233891, cls_loss = 0.233891, lr = 0.004967, step: 6, (1.037 sec / step, data: 0.037 sec, eta: 00:10:16)
+2021-05-27 22:52:56, INFO:SimpleCV:total_loss = 0.232802, cls_loss = 0.232802, lr = 0.00496, step: 7, (0.982 sec / step, data: 0.032 sec, eta: 00:09:42)
+2021-05-27 22:52:57, INFO:SimpleCV:total_loss = 0.231701, cls_loss = 0.231701, lr = 0.004953, step: 8, (0.933 sec / step, data: 0.028 sec, eta: 00:09:12)
+2021-05-27 22:52:57, INFO:SimpleCV:total_loss = 0.230613, cls_loss = 0.230613, lr = 0.004947, step: 9, (0.894 sec / step, data: 0.025 sec, eta: 00:08:48)
+2021-05-27 22:52:58, INFO:SimpleCV:total_loss = 0.229547, cls_loss = 0.229547, lr = 0.00494, step: 10, (0.865 sec / step, data: 0.023 sec, eta: 00:08:30)
+2021-05-27 22:53:12, INFO:SimpleCV:[Speed] 0.233 s/im
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] 1/1
+2021-05-27 22:53:12, INFO:SimpleCV:[Speed] 0.233 s/batched im (avg)
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] OA = 0.456594
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] AA = 0.190101
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] Kappa = 0.059153
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_1 = 0.000762
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_2 = 0.992092
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_3 = 0.0
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_4 = 0.000989
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_5 = 0.701728
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_6 = 0.015066
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_7 = 0.0
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_8 = 0.000274
+2021-05-27 22:53:12, INFO:SimpleCV:[Eval] acc_9 = 0.0
+2021-05-27 22:53:12, INFO:SimpleCV:total_loss = 0.228498, cls_loss = 0.228498, lr = 0.004933, step: 11, (2.093 sec / step, data: 1.272 sec, eta: 00:20:32)
+2021-05-27 22:53:13, INFO:SimpleCV:total_loss = 0.227457, cls_loss = 0.227457, lr = 0.004927, step: 12, (1.968 sec / step, data: 1.166 sec, eta: 00:19:17)
+2021-05-27 22:53:13, INFO:SimpleCV:total_loss = 0.226415, cls_loss = 0.226415, lr = 0.00492, step: 13, (1.86 sec / step, data: 1.076 sec, eta: 00:18:11)
+2021-05-27 22:53:14, INFO:SimpleCV:total_loss = 0.225364, cls_loss = 0.225364, lr = 0.004913, step: 14, (1.767 sec / step, data: 0.999 sec, eta: 00:17:15)
+2021-05-27 22:53:15, INFO:SimpleCV:total_loss = 0.2243, cls_loss = 0.2243, lr = 0.004906, step: 15, (1.689 sec / step, data: 0.932 sec, eta: 00:16:28)
+2021-05-27 22:53:15, INFO:SimpleCV:total_loss = 0.223219, cls_loss = 0.223219, lr = 0.0049, step: 16, (1.619 sec / step, data: 0.874 sec, eta: 00:15:45)
+2021-05-27 22:53:16, INFO:SimpleCV:total_loss = 0.222121, cls_loss = 0.222121, lr = 0.004893, step: 17, (1.56 sec / step, data: 0.823 sec, eta: 00:15:09)
+2021-05-27 22:53:16, INFO:SimpleCV:total_loss = 0.221007, cls_loss = 0.221007, lr = 0.004886, step: 18, (1.505 sec / step, data: 0.777 sec, eta: 00:14:35)
+2021-05-27 22:53:17, INFO:SimpleCV:total_loss = 0.219881, cls_loss = 0.219881, lr = 0.00488, step: 19, (1.455 sec / step, data: 0.736 sec, eta: 00:14:05)
+2021-05-27 22:53:17, INFO:SimpleCV:total_loss = 0.218748, cls_loss = 0.218748, lr = 0.004873, step: 20, (1.411 sec / step, data: 0.699 sec, eta: 00:13:38)
+2021-05-27 22:53:30, INFO:SimpleCV:[Speed] 0.216 s/im
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] 1/1
+2021-05-27 22:53:30, INFO:SimpleCV:[Speed] 0.216 s/batched im (avg)
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] OA = 0.471401
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] AA = 0.226842
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] Kappa = 0.094033
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_1 = 0.000305
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_2 = 0.999404
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_3 = 0.0
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_4 = 0.018793
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_5 = 0.998497
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_6 = 0.024307
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_7 = 0.0
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_8 = 0.000274
+2021-05-27 22:53:30, INFO:SimpleCV:[Eval] acc_9 = 0.0
+2021-05-27 22:53:31, INFO:SimpleCV:total_loss = 0.217607, cls_loss = 0.217607, lr = 0.004866, step: 21, (1.979 sec / step, data: 1.272 sec, eta: 00:19:05)
+2021-05-27 22:53:31, INFO:SimpleCV:total_loss = 0.216459, cls_loss = 0.216459, lr = 0.00486, step: 22, (1.915 sec / step, data: 1.214 sec, eta: 00:18:27)
+2021-05-27 22:53:32, INFO:SimpleCV:total_loss = 0.215304, cls_loss = 0.215304, lr = 0.004853, step: 23, (1.857 sec / step, data: 1.161 sec, eta: 00:17:51)
+2021-05-27 22:53:33, INFO:SimpleCV:total_loss = 0.214146, cls_loss = 0.214146, lr = 0.004846, step: 24, (1.804 sec / step, data: 1.113 sec, eta: 00:17:19)
+2021-05-27 22:53:33, INFO:SimpleCV:total_loss = 0.212988, cls_loss = 0.212988, lr = 0.004839, step: 25, (1.755 sec / step, data: 1.068 sec, eta: 00:16:49)
+2021-05-27 22:53:34, INFO:SimpleCV:total_loss = 0.211832, cls_loss = 0.211832, lr = 0.004833, step: 26, (1.709 sec / step, data: 1.027 sec, eta: 00:16:21)
+2021-05-27 22:53:34, INFO:SimpleCV:total_loss = 0.210678, cls_loss = 0.210678, lr = 0.004826, step: 27, (1.668 sec / step, data: 0.989 sec, eta: 00:15:55)
+2021-05-27 22:53:35, INFO:SimpleCV:total_loss = 0.209524, cls_loss = 0.209524, lr = 0.004819, step: 28, (1.629 sec / step, data: 0.954 sec, eta: 00:15:31)
+2021-05-27 22:53:35, INFO:SimpleCV:total_loss = 0.208369, cls_loss = 0.208369, lr = 0.004812, step: 29, (1.593 sec / step, data: 0.921 sec, eta: 00:15:09)
+2021-05-27 22:53:36, INFO:SimpleCV:total_loss = 0.207212, cls_loss = 0.207212, lr = 0.004806, step: 30, (1.559 sec / step, data: 0.89 sec, eta: 00:14:48)
+2021-05-27 22:53:49, INFO:SimpleCV:[Speed] 0.198 s/im
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] 1/1
+2021-05-27 22:53:49, INFO:SimpleCV:[Speed] 0.198 s/batched im (avg)
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] OA = 0.520003
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] AA = 0.379241
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] Kappa = 0.204915
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_1 = 0.013711
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_2 = 0.9987
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_3 = 0.216073
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_4 = 0.075833
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_5 = 1.0
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_6 = 0.0454
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_7 = 0.0
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_8 = 0.095473
+2021-05-27 22:53:49, INFO:SimpleCV:[Eval] acc_9 = 0.967983
+2021-05-27 22:53:50, INFO:SimpleCV:total_loss = 0.206053, cls_loss = 0.206053, lr = 0.004799, step: 31, (1.942 sec / step, data: 1.276 sec, eta: 00:18:25)
+2021-05-27 22:53:50, INFO:SimpleCV:total_loss = 0.204888, cls_loss = 0.204888, lr = 0.004792, step: 32, (1.9 sec / step, data: 1.236 sec, eta: 00:17:59)
+2021-05-27 22:53:51, INFO:SimpleCV:total_loss = 0.203716, cls_loss = 0.203716, lr = 0.004786, step: 33, (1.861 sec / step, data: 1.198 sec, eta: 00:17:35)
+2021-05-27 22:53:51, INFO:SimpleCV:total_loss = 0.202533, cls_loss = 0.202533, lr = 0.004779, step: 34, (1.824 sec / step, data: 1.163 sec, eta: 00:17:12)
+2021-05-27 22:53:52, INFO:SimpleCV:total_loss = 0.201337, cls_loss = 0.201337, lr = 0.004772, step: 35, (1.788 sec / step, data: 1.13 sec, eta: 00:16:50)
+2021-05-27 22:53:52, INFO:SimpleCV:total_loss = 0.200129, cls_loss = 0.200129, lr = 0.004765, step: 36, (1.754 sec / step, data: 1.099 sec, eta: 00:16:29)
+2021-05-27 22:53:53, INFO:SimpleCV:total_loss = 0.198908, cls_loss = 0.198908, lr = 0.004759, step: 37, (1.723 sec / step, data: 1.069 sec, eta: 00:16:09)
+2021-05-27 22:53:54, INFO:SimpleCV:total_loss = 0.197672, cls_loss = 0.197672, lr = 0.004752, step: 38, (1.693 sec / step, data: 1.041 sec, eta: 00:15:51)
+2021-05-27 22:53:54, INFO:SimpleCV:total_loss = 0.19642, cls_loss = 0.19642, lr = 0.004745, step: 39, (1.664 sec / step, data: 1.014 sec, eta: 00:15:33)
+2021-05-27 22:53:55, INFO:SimpleCV:total_loss = 0.195152, cls_loss = 0.195152, lr = 0.004738, step: 40, (1.636 sec / step, data: 0.989 sec, eta: 00:15:16)
+2021-05-27 22:54:07, INFO:SimpleCV:[Speed] 0.205 s/im
+2021-05-27 22:54:07, INFO:SimpleCV:[Eval] 1/1
+2021-05-27 22:54:08, INFO:SimpleCV:[Speed] 0.205 s/batched im (avg)
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] OA = 0.623866
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] AA = 0.578363
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] Kappa = 0.450568
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_1 = 0.115021
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_2 = 0.954393
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_3 = 0.8359
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_4 = 0.4273
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_5 = 1.0
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_6 = 0.084773
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_7 = 0.238602
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_8 = 0.550343
+2021-05-27 22:54:08, INFO:SimpleCV:[Eval] acc_9 = 0.998933
+2021-05-27 22:54:08, INFO:SimpleCV:total_loss = 0.193866, cls_loss = 0.193866, lr = 0.004732, step: 41, (1.924 sec / step, data: 1.277 sec, eta: 00:17:55)
+2021-05-27 22:54:09, INFO:SimpleCV:total_loss = 0.192563, cls_loss = 0.192563, lr = 0.004725, step: 42, (1.892 sec / step, data: 1.246 sec, eta: 00:17:35)
+2021-05-27 22:54:09, INFO:SimpleCV:total_loss = 0.191243, cls_loss = 0.191243, lr = 0.004718, step: 43, (1.862 sec / step, data: 1.217 sec, eta: 00:17:16)
+2021-05-27 22:54:10, INFO:SimpleCV:total_loss = 0.189906, cls_loss = 0.189906, lr = 0.004711, step: 44, (1.833 sec / step, data: 1.19 sec, eta: 00:16:58)
+2021-05-27 22:54:11, INFO:SimpleCV:total_loss = 0.188552, cls_loss = 0.188552, lr = 0.004704, step: 45, (1.805 sec / step, data: 1.163 sec, eta: 00:16:41)
+2021-05-27 22:54:11, INFO:SimpleCV:total_loss = 0.187184, cls_loss = 0.187184, lr = 0.004698, step: 46, (1.778 sec / step, data: 1.138 sec, eta: 00:16:25)
+2021-05-27 22:54:12, INFO:SimpleCV:total_loss = 0.185803, cls_loss = 0.185803, lr = 0.004691, step: 47, (1.753 sec / step, data: 1.114 sec, eta: 00:16:09)
+2021-05-27 22:54:12, INFO:SimpleCV:total_loss = 0.18441, cls_loss = 0.18441, lr = 0.004684, step: 48, (1.728 sec / step, data: 1.091 sec, eta: 00:15:54)
+2021-05-27 22:54:13, INFO:SimpleCV:total_loss = 0.183007, cls_loss = 0.183007, lr = 0.004677, step: 49, (1.705 sec / step, data: 1.068 sec, eta: 00:15:39)
+2021-05-27 22:54:13, INFO:SimpleCV:total_loss = 0.181594, cls_loss = 0.181594, lr = 0.004671, step: 50, (1.683 sec / step, data: 1.047 sec, eta: 00:15:25)

@@ -1,0 +1,7 @@
+2021-05-27 22:52:15, INFO:SimpleCV:external parameter: ['train.save_ckpt_interval_epoch', '9999']
+2021-05-27 22:52:15, INFO:SimpleCV:[trainable params] 166/166
+2021-05-27 22:52:15, INFO:SimpleCV:#params: 2078959, 2.079 M
+2021-05-27 22:52:15, INFO:SimpleCV:batch_size_per_gpu = 1
+2021-05-27 22:52:15, INFO:SimpleCV:use 1 forward and 1 backward mode.
+2021-05-27 22:52:15, INFO:SimpleCV:num_epochs ~= 60.0
+2021-05-27 22:52:15, INFO:SimpleCV:num_iters = 600
