@@ -125,3 +125,4 @@ Our code is inspired by FreeNet
 [FPGA/FreeNet](https://github.com/Z-Zheng/FreeNet)
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/nshaud)
+[![Page Views Count](https://badges.toozhao.com/badges/01FE3D6PGFZN6SHP723NETVVR7/green.svg)](https://badges.toozhao.com/stats/01FE3D6PGFZN6SHP723NETVVR7 "Get your own page views count badge on badges.toozhao.com")
