@@ -117,7 +117,10 @@ bash scripts/SSDGL_1_0_HOS.sh
 ```
 GRSS2013_HOS datasets
 Baidu Drive 
+MAT
 Link: https://pan.baidu.com/s/1kPF5f857cJHH617TluOLqQ    Code: a3qc
+TIF
+Link: https://pan.baidu.com/s/1ldGsmDxQvE-cDvxMQ_FQZg    Code: 2633
 ```
 ## Acknowledgments
 Our code is inspired by FreeNet
