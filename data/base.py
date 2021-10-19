@@ -3,7 +3,7 @@ import numpy as np
 from simplecv.data.preprocess import divisible_pad
 import torch
 from torch.utils import data
-
+from random import shuffle
 SEED = 2333
 
 class FullImageDataset_hos(dataset.Dataset):
@@ -175,20 +175,20 @@ def fixed_num_sample_hos(gt_mask: np.ndarray, num_train_samples, num_classes, se
         train_indicator, test_indicator
     """
     rs = np.random.RandomState(seed)
-
+    shuchu=[]
     gt_mask_flatten = gt_mask.ravel()
     train_indicator = np.zeros_like(gt_mask_flatten)
     test_indicator = np.zeros_like(gt_mask_flatten)
     for i in range(1, num_classes + 1):
         inds = np.where(gt_mask_flatten == i)[0]
-        rs.shuffle(inds)
+        shuffle(inds)
         #print("num_train_samples",num_train_samples)
         train_inds = inds[:num_train_samples]
         test_inds = inds[num_train_samples:]
-
+        shuchu.extend(train_inds)
         train_indicator[train_inds] = 1
         test_indicator[test_inds] = 1
-
+        #print("shuchu",shuchu)
     train_indicator = train_indicator.reshape(gt_mask.shape)
     test_indicator = test_indicator.reshape(gt_mask.shape)
 
@@ -211,6 +211,8 @@ def fixed_num_sample(gt_mask: np.ndarray, sample_percent, num_classes, seed=2333
     gt_mask_flatten = gt_mask.ravel()
     train_indicator = np.zeros_like(gt_mask_flatten)
     test_indicator = np.zeros_like(gt_mask_flatten)
+    shuchu=[]
+
     for i in range(1, num_classes + 1):
         inds = np.where(gt_mask_flatten == i)[0]
         count=np.sum(gt_mask_flatten == i)
@@ -218,15 +220,15 @@ def fixed_num_sample(gt_mask: np.ndarray, sample_percent, num_classes, seed=2333
         num_train_samples = num_train_samples.astype(np.int32)
         if num_train_samples <5:
             num_train_samples=5 # At least 5 samples per class
-        rs.shuffle(inds)
+        shuffle(inds)
 
         train_inds = inds[:num_train_samples]
         test_inds = inds[num_train_samples:]
-        print(len(train_inds))
+        shuchu.extend(train_inds)
 
         train_indicator[train_inds] = 1
         test_indicator[test_inds] = 1
-
+        #print("shuchu",shuchu)
     train_indicator = train_indicator.reshape(gt_mask.shape)
     test_indicator = test_indicator.reshape(gt_mask.shape)
     return train_indicator, test_indicator
@@ -247,7 +249,7 @@ def minibatch_sample_hos(gt_mask: np.ndarray, train_indicator: np.ndarray, minib
     for cls in cls_list:
         train_inds_per_class = np.where(gt_mask == cls, train_indicator, np.zeros_like(train_indicator))
         inds = np.where(train_inds_per_class.ravel() == 1)[0]
-        rs.shuffle(inds)
+        shuffle(inds)
 
         inds_dict_per_class[cls] = inds
 
@@ -256,8 +258,7 @@ def minibatch_sample_hos(gt_mask: np.ndarray, train_indicator: np.ndarray, minib
     while True:
         train_inds = np.zeros_like(train_indicator).ravel()
         for cls, inds in inds_dict_per_class.items():
-            rs.shuffle(inds)
-
+            shuffle(inds)
             cd = len(inds)
             fetch_inds = inds[:cd]
             train_inds[fetch_inds] = 1
@@ -285,7 +286,7 @@ def minibatch_sample(gt_mask: np.ndarray, train_indicator: np.ndarray, batch_siz
     for cls in cls_list:
         train_inds_per_class = np.where(gt_mask == cls, train_indicator, np.zeros_like(train_indicator))
         inds = np.where(train_inds_per_class.ravel() == 1)[0]
-        rs.shuffle(inds)
+        shuffle(inds)
 
         inds_dict_per_class[cls] = inds
 
@@ -294,7 +295,7 @@ def minibatch_sample(gt_mask: np.ndarray, train_indicator: np.ndarray, batch_siz
     while True:
         train_inds = np.zeros_like(train_indicator).ravel()
         for cls, inds in inds_dict_per_class.items():
-                rs.shuffle(inds)
+                shuffle(inds)
                 cd=min(batch_size, len(inds))
                 fetch_inds = inds[:cd]
                 train_inds[fetch_inds] = 1
