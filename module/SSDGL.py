@@ -140,8 +140,7 @@ class SSDGL(CVModule):
 
         return torch.softmax(logit, dim=1)
 
-    def loss(self, x, y, weight):
-        beta = 0.9999
+
     def loss(self, x, y, weight):
         beta = 0.9999
         if dataset_path =="SSDGL.SSDGL_1_0_pavia":
