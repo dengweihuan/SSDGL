@@ -75,18 +75,7 @@ class SSDGL(CVModule):
         ])
         inner_dim = int(self.config.inner_dim * self.config.reduction_ratio)
 
-        self.BasicBlock_list = nn.ModuleList([
-            BasicBlock(inner_dim),
-            BasicBlock(inner_dim),
-            BasicBlock(inner_dim),
-            BasicBlock(inner_dim),
-        ])
-        self.spation_list = nn.ModuleList([
-            SpatialAttention(),
-            SpatialAttention(),
-            SpatialAttention(),
-            SpatialAttention(),
-        ])
+
         self.reduce_1x1convs = nn.ModuleList([
             nn.Conv2d(block1_channels, inner_dim, 1),
             nn.Conv2d(block2_channels, inner_dim, 1),
