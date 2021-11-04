@@ -27,25 +27,37 @@ class FullImageDataset_hos(dataset.Dataset):
         self.preset()
 
     def preset(self):
-        train_indicator, test_indicator = fixed_num_sample_hos(self.mask, self.num_train_samples_per_class,
-                                                           self.num_classes, self._seed)
+        if self.training:
 
-        blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
+            #print(self.num_train_samples_per_class)
+
+            train_indicator, test_indicator = fixed_num_sample_hos(self.mask, self.num_train_samples_per_class,self.num_classes, self._seed)
+
+            blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
                                               self.mask[None, :, :],
                                               train_indicator[None, :, :],
                                               test_indicator[None, :, :]], axis=0)], 16, False)
-        im = blob[0, :self.image.shape[-1], :, :]
+            im = blob[0, :self.image.shape[-1], :, :]
 
-        mask = blob[0, -3, :, :]
-        self.train_indicator = blob[0, -2, :, :]
-        self.test_indicator = blob[0, -1, :, :]
+            mask = blob[0, -3, :, :]
+            self.train_indicator = blob[0, -2, :, :]
+            self.test_indicator = blob[0, -1, :, :]
 
-        if self.training:
+
             self.train_inds_list = minibatch_sample_hos(mask, self.train_indicator, self.sub_minibatch,
                                                     seed=self.seeds_for_minibatchsample.pop())
 
-        self.pad_im = im
-        self.pad_mask = mask
+            self.pad_im = im
+            self.pad_mask = mask
+            np.save('train_indicator.npy', self.train_indicator)
+            np.save('test_indicator.npy', self.test_indicator)
+            np.save('pad_im.npy', self.pad_im)
+            np.save('pad_mask.npy', self.pad_mask)
+        else:
+            self.train_indicator,self.test_indicator =np.load('train_indicator.npy'), np.load('test_indicator.npy')
+            self.pad_im = np.load('pad_im.npy')
+            self.pad_mask = np.load('pad_mask.npy')
+
 
     def resample_minibatch(self):
         self.train_inds_list = minibatch_sample_hos(self.pad_mask, self.train_indicator, self.sub_minibatch,
@@ -91,23 +103,37 @@ class FullImageDataset(dataset.Dataset):
         self.preset()
 
     def preset(self):
-        train_indicator, test_indicator= fixed_num_sample(self.mask,self.sample_percent,self.num_classes,self._seed)
+        if self.training:
 
-        blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
+            #print(self.num_train_samples_per_class)
+
+            train_indicator, test_indicator = fixed_num_sample(self.mask, self.num_train_samples_per_class,self.num_classes, self._seed)
+
+            blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
                                               self.mask[None, :, :],
                                               train_indicator[None, :, :],
                                               test_indicator[None, :, :]], axis=0)], 16, False)
-        im = blob[0, :self.image.shape[-1], :, :]
+            im = blob[0, :self.image.shape[-1], :, :]
 
-        mask = blob[0, -3, :, :]
-        self.train_indicator = blob[0, -2, :, :]
-        self.test_indicator = blob[0, -1, :, :]
-        if self.training:
-            self.train_inds_list = minibatch_sample(mask, self.train_indicator, self.batch_size,
+            mask = blob[0, -3, :, :]
+            self.train_indicator = blob[0, -2, :, :]
+            self.test_indicator = blob[0, -1, :, :]
+
+
+            self.train_inds_list = minibatch_sample(mask, self.train_indicator, self.sub_minibatch,
                                                     seed=self.seeds_for_minibatchsample.pop())
 
-        self.pad_im = im
-        self.pad_mask = mask
+            self.pad_im = im
+            self.pad_mask = mask
+            np.save('train_indicator.npy', self.train_indicator)
+            np.save('test_indicator.npy', self.test_indicator)
+            np.save('pad_im.npy', self.pad_im)
+            np.save('pad_mask.npy', self.pad_mask)
+        else:
+            self.train_indicator,self.test_indicator =np.load('train_indicator.npy'), np.load('test_indicator.npy')
+            self.pad_im = np.load('pad_im.npy')
+            self.pad_mask = np.load('pad_mask.npy')
+
 
     def resample_minibatch(self):
         self.train_inds_list = minibatch_sample(self.pad_mask, self.train_indicator, self.batch_size,
