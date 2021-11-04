@@ -107,7 +107,7 @@ class FullImageDataset(dataset.Dataset):
 
             #print(self.num_train_samples_per_class)
 
-            train_indicator, test_indicator = fixed_num_sample(self.mask, self.num_train_samples_per_class,self.num_classes, self._seed)
+            train_indicator, test_indicator = fixed_num_sample(self.mask, self.sample_percent,self.num_classes, self._seed)
 
             blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
                                               self.mask[None, :, :],
@@ -120,7 +120,7 @@ class FullImageDataset(dataset.Dataset):
             self.test_indicator = blob[0, -1, :, :]
 
 
-            self.train_inds_list = minibatch_sample(mask, self.train_indicator, self.sub_minibatch,
+            self.train_inds_list = minibatch_sample(mask, self.train_indicator, self.batch_size,
                                                     seed=self.seeds_for_minibatchsample.pop())
 
             self.pad_im = im
