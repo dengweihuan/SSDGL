@@ -6,7 +6,7 @@ from torch.utils import data
 from random import shuffle
 SEED = 2333
 
-class FullImageDataset_hos(dataset.Dataset):
+class FullImageDataset_small(dataset.Dataset):
     def __init__(self,
                  image,
                  mask,
@@ -31,7 +31,7 @@ class FullImageDataset_hos(dataset.Dataset):
 
             #print(self.num_train_samples_per_class)
 
-            train_indicator, test_indicator = fixed_num_sample_hos(self.mask, self.num_train_samples_per_class,self.num_classes, self._seed)
+            train_indicator, test_indicator = fixed_num_sample_small(self.mask, self.num_train_samples_per_class,self.num_classes, self._seed)
 
             blob = divisible_pad([np.concatenate([self.image.transpose(2, 0, 1),
                                               self.mask[None, :, :],
@@ -44,7 +44,7 @@ class FullImageDataset_hos(dataset.Dataset):
             self.test_indicator = blob[0, -1, :, :]
 
 
-            self.train_inds_list = minibatch_sample_hos(mask, self.train_indicator, self.sub_minibatch,
+            self.train_inds_list = minibatch_sample_small(mask, self.train_indicator, self.sub_minibatch,
                                                     seed=self.seeds_for_minibatchsample.pop())
 
             self.pad_im = im
@@ -60,12 +60,12 @@ class FullImageDataset_hos(dataset.Dataset):
 
 
     def resample_minibatch(self):
-        self.train_inds_list = minibatch_sample_hos(self.pad_mask, self.train_indicator, self.sub_minibatch,
+        self.train_inds_list = minibatch_sample_small(self.pad_mask, self.train_indicator, self.sub_minibatch,
                                                 seed=self.seeds_for_minibatchsample.pop())
 
     @property
     def num_classes(self):
-        return 15
+        return 9
 
     def __getitem__(self, idx):
 
@@ -95,6 +95,7 @@ class FullImageDataset(dataset.Dataset):
         self.training = training
         self.sample_percent = sample_percent
         self.batch_size = batch_size
+
         self._seed = np_seed
         self._rs = np.random.RandomState(np_seed)
 
@@ -157,9 +158,9 @@ class FullImageDataset(dataset.Dataset):
         else:
             return 1
 
-class MinibatchSampler_hos(data.Sampler):
-    def __init__(self, dataset: FullImageDataset_hos):
-        super(MinibatchSampler_hos, self).__init__(None)
+class MinibatchSampler_small(data.Sampler):
+    def __init__(self, dataset: FullImageDataset_small):
+        super(MinibatchSampler_small, self).__init__(None)
         self.dataset = dataset
         self.g = torch.Generator()
         self.g.manual_seed(SEED)
@@ -188,7 +189,7 @@ class MinibatchSampler(data.Sampler):
     def __len__(self):
         return len(self.dataset)
 
-def fixed_num_sample_hos(gt_mask: np.ndarray, num_train_samples, num_classes, seed=2333):
+def fixed_num_sample_small(gt_mask: np.ndarray, num_train_samples, num_classes, seed=2333):
     """
 
     Args:
@@ -207,7 +208,7 @@ def fixed_num_sample_hos(gt_mask: np.ndarray, num_train_samples, num_classes, se
     test_indicator = np.zeros_like(gt_mask_flatten)
     for i in range(1, num_classes + 1):
         inds = np.where(gt_mask_flatten == i)[0]
-        shuffle(inds)
+        rs.shuffle(inds)
         #print("num_train_samples",num_train_samples)
         train_inds = inds[:num_train_samples]
         test_inds = inds[num_train_samples:]
@@ -246,7 +247,7 @@ def fixed_num_sample(gt_mask: np.ndarray, sample_percent, num_classes, seed=2333
         num_train_samples = num_train_samples.astype(np.int32)
         if num_train_samples <5:
             num_train_samples=5 # At least 5 samples per class
-        shuffle(inds)
+        rs.shuffle(inds)
 
         train_inds = inds[:num_train_samples]
         test_inds = inds[num_train_samples:]
@@ -259,7 +260,7 @@ def fixed_num_sample(gt_mask: np.ndarray, sample_percent, num_classes, seed=2333
     test_indicator = test_indicator.reshape(gt_mask.shape)
     return train_indicator, test_indicator
 
-def minibatch_sample_hos(gt_mask: np.ndarray, train_indicator: np.ndarray, minibatch_size, seed):
+def minibatch_sample_small(gt_mask: np.ndarray, train_indicator: np.ndarray, minibatch_size, seed):
     """
     Args:
         gt_mask: 2-D array of shape [height, width]
@@ -275,7 +276,7 @@ def minibatch_sample_hos(gt_mask: np.ndarray, train_indicator: np.ndarray, minib
     for cls in cls_list:
         train_inds_per_class = np.where(gt_mask == cls, train_indicator, np.zeros_like(train_indicator))
         inds = np.where(train_inds_per_class.ravel() == 1)[0]
-        shuffle(inds)
+        rs.shuffle(inds)
 
         inds_dict_per_class[cls] = inds
 
@@ -284,12 +285,12 @@ def minibatch_sample_hos(gt_mask: np.ndarray, train_indicator: np.ndarray, minib
     while True:
         train_inds = np.zeros_like(train_indicator).ravel()
         for cls, inds in inds_dict_per_class.items():
-            shuffle(inds)
+            rs.shuffle(inds)
             cd = len(inds)
             fetch_inds = inds[:cd]
             train_inds[fetch_inds] = 1
         cnt += 1
-        if cnt == 11:
+        if cnt == 21:
             return train_inds_list
         train_inds_list.append(train_inds.reshape(train_indicator.shape))
 
@@ -312,7 +313,8 @@ def minibatch_sample(gt_mask: np.ndarray, train_indicator: np.ndarray, batch_siz
     for cls in cls_list:
         train_inds_per_class = np.where(gt_mask == cls, train_indicator, np.zeros_like(train_indicator))
         inds = np.where(train_inds_per_class.ravel() == 1)[0]
-        shuffle(inds)
+        
+        rs.shuffle(inds)
 
         inds_dict_per_class[cls] = inds
 
@@ -321,13 +323,13 @@ def minibatch_sample(gt_mask: np.ndarray, train_indicator: np.ndarray, batch_siz
     while True:
         train_inds = np.zeros_like(train_indicator).ravel()
         for cls, inds in inds_dict_per_class.items():
-                shuffle(inds)
+                rs.shuffle(inds)
                 cd=min(batch_size, len(inds))
                 fetch_inds = inds[:cd]
+                #print(fetch_inds)
                 train_inds[fetch_inds] = 1
 
         cnt += 1
-        if cnt == 11:
+        if cnt == 21:
             return train_inds_list
         train_inds_list.append(train_inds.reshape(train_indicator.shape))
-
