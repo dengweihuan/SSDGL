@@ -4,8 +4,8 @@ config = dict(
         params=dict(
             in_channels=200,
             num_classes=16,
-            block_channels=(96, 128, 192, 256),
-            inner_dim=128,
+            block_channels=(128, 192, 256,320),
+            inner_dim=192,
             reduction_ratio=1.0,
         )
     ),
@@ -14,22 +14,24 @@ config = dict(
             type='NewIndianPinesLoader',
             params=dict(
                 training=True,
-                num_workers=4,
+                num_workers=8,
                 image_mat_path='./IndianPines/Indian_pines_corrected.mat',
                 gt_mat_path='./IndianPines/Indian_pines_gt.mat',
                 sample_percent=0.05,
-                batch_size=10
+                batch_size=10,
+                select_type='sample_percent',
             )
         ),
         test=dict(
             type='NewIndianPinesLoader',
             params=dict(
                 training=False,
-                num_workers=4,
+                num_workers=8,
                 image_mat_path='./IndianPines/Indian_pines_corrected.mat',
                 gt_mat_path='./IndianPines/Indian_pines_gt.mat',
                 sample_percent=0.05,
-                batch_size=10
+                batch_size=10,
+                select_type='sample_percent',                
             )
         )
     ),
@@ -43,9 +45,10 @@ config = dict(
     learning_rate=dict(
         type='poly',
         params=dict(
-            base_lr=0.005,
+            base_lr=0.003,
             power=0.8,
             max_iters=600),
+
     ),
     train=dict(
         forward_times=1,
