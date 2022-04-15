@@ -14,22 +14,24 @@ config = dict(
             type='NewPaviaLoader',
             params=dict(
                 training=True,
-                num_workers=4,
+                num_workers=8,
                 image_mat_path='./pavia/PaviaU.mat',
                 gt_mat_path='./pavia/PaviaU_gt.mat',
                 sample_percent=0.01,
-                batch_size=10
+                batch_size=20,
+                select_type='sample_percent',                
             )
         ),
         test=dict(
             type='NewPaviaLoader',
             params=dict(
                 training=False,
-                num_workers=4,
+                num_workers=8,
                 image_mat_path='./pavia/PaviaU.mat',
                 gt_mat_path='./pavia/PaviaU_gt.mat',
                 sample_percent=0.01,
-                batch_size=10
+                batch_size=20,
+                select_type='sample_percent',                
             )
         )
     ),
@@ -43,8 +45,8 @@ config = dict(
     learning_rate=dict(
         type='poly',
         params=dict(
-            base_lr=0.005,
-            power=0.8,
+            base_lr=0.001,
+            power=0.9,
             max_iters=600),
     ),
     train=dict(
