@@ -13,7 +13,7 @@ args = train.parser.parse_args()
 dataset_path = args.config_path
 
 import configparser
-#from SSDGL_1_0_train11 import config
+
 from simplecv.util import config
 from simplecv.core.config import AttrDict
 cfg=config.import_config(dataset_path)
@@ -118,17 +118,13 @@ class SSDGL(CVModule):
 
         self.cls_pred_conv = nn.Conv2d(self.config.in_channels, self.config.num_classes, 1)
 
-        #self.conv33 = nn.ModuleList([nn.Conv2d(256, 128, 3, 1, 1)])
+
 
     def top_down(self, top, lateral):
 
         top2x = F.interpolate(top, scale_factor=2.0, mode='bilinear')
 
 
-        # top2x = self.upsample(top)
-        #concat = torch.cat([lateral, top2x], dim=1)
-        #later2=lateral.size(2)
-        #later3=lateral.size(3)
         return lateral+top2x
 
     def forward(self, x, y=None, w=None, **kwargs):
@@ -169,7 +165,8 @@ class SSDGL(CVModule):
         losses = F.cross_entropy(x, y.long() - 1, weight=None,
                                  ignore_index=-1, reduction='none')
 
-        v = losses.mul_(weight).sum() / weight.sum()
+        v = losses.sum() / weight.sum()
+        #v = losses.mul_(weight).sum() / weight.sum()
         return v
 
 
@@ -364,7 +361,6 @@ class ConvLSTM(nn.Module):
         for i in range(self.step - 1):
             result = torch.cat([result, outputs[i + 1]], dim=1)
         return result
-
 
 
 
