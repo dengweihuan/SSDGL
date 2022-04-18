@@ -2,7 +2,7 @@ from scipy.io import loadmat
 from simplecv.data import preprocess
 
 from data.base import FullImageDataset
-
+from data.base import FullImageDataset_small
 SEED = 2333
 
 
@@ -11,7 +11,7 @@ class NewIndianPinesDataset(FullImageDataset):
                  image_mat_path,
                  gt_mat_path,
                  training=True,
-                 sample_percent=0.01,
+                 sample_percent=0.05,
                  batch_size=10):
         self.im_mat_path = image_mat_path
         self.gt_mat_path = gt_mat_path
@@ -34,3 +34,34 @@ class NewIndianPinesDataset(FullImageDataset):
     @property
     def num_classes(self):
         return 16
+class SmallIndianPinesDataset(FullImageDataset_small):
+    def __init__(self,
+                 image_mat_path,
+                 gt_mat_path,
+                 training=True,
+                 num_train_samples_per_class=10,
+                 sub_minibatch=10):
+        self.im_mat_path = image_mat_path
+        self.gt_mat_path = gt_mat_path
+        #print("as",num_train_samples_per_class)
+        im_mat = loadmat(image_mat_path)
+        image = im_mat['indian_pines_corrected']
+        gt_mat = loadmat(gt_mat_path)
+        mask = gt_mat['indian_pines_gt']
+
+        im_cmean = image.reshape((-1, image.shape[-1])).mean(axis=0)
+        im_cstd = image.reshape((-1, image.shape[-1])).std(axis=0)
+        self.vanilla_image = image
+        image = preprocess.mean_std_normalize(image, im_cmean, im_cstd)
+
+        self.training = training
+        self.num_train_samples_per_class = num_train_samples_per_class
+        self.sub_minibatch = sub_minibatch
+
+        super(SmallIndianPinesDataset, self).__init__(image, mask, training, np_seed=SEED,
+                                              num_train_samples_per_class=num_train_samples_per_class,
+                                              sub_minibatch=sub_minibatch)
+                                              
+    @property
+    def num_classes(self):
+        return 16                                                      
