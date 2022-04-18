@@ -1,13 +1,13 @@
 from scipy.io import loadmat
 from simplecv.data import preprocess
 import torch.nn as nn
-from data.base import FullImageDataset_hos
+from data.base import FullImageDataset_small
 import torch
 import torch.nn as nn
 SEED = 2333
 
 
-class NewHOSDataset(FullImageDataset_hos):
+class NewHOSDataset(FullImageDataset_small):
     def __init__(self,
                  image_mat_path,
                  gt_mat_path,
