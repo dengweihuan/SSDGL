@@ -1,10 +1,10 @@
 config = dict(
     model=dict(
-        type='SSDGL',
+        type='SSDGL_HOS',
         params=dict(
             in_channels=144,
             num_classes=15,
-            block_channels=(96, 128, 192, 256),
+            block_channels=(96, 128, 192,256),
             inner_dim=128,
             reduction_ratio=1.0,
         )
@@ -14,7 +14,7 @@ config = dict(
             type='NewHOSLoader',
             params=dict(
                 training=True,
-                num_workers=0,
+                num_workers=8,
                 image_mat_path='./GRSS2013/2013_IEEE_GRSS_DF_Contest_CASI_349_1905_144.mat',
                 gt_mat_path='./GRSS2013/GRSS2013.mat',
                 num_train_samples_per_class=10,
@@ -25,7 +25,7 @@ config = dict(
             type='NewHOSLoader',
             params=dict(
                 training=False,
-                num_workers=0,
+                num_workers=8,
                 image_mat_path='./GRSS2013/2013_IEEE_GRSS_DF_Contest_CASI_349_1905_144.mat',
                 gt_mat_path='./GRSS2013/GRSS2013.mat',
                 num_train_samples_per_class=10,
@@ -36,20 +36,20 @@ config = dict(
     optimizer=dict(
         type='sgd',
         params=dict(
-            momentum=0.9,
-            weight_decay=0.001
+            momentum=0.6,
+            weight_decay=0.01
         )
     ),
     learning_rate=dict(
         type='poly',
         params=dict(
             base_lr=0.005,
-            power=0.8,
-            max_iters=1000),
+            power=0.6,
+            max_iters=600),
     ),
     train=dict(
         forward_times=1,
-        num_iters=1000,
+        num_iters=600,
         eval_per_epoch=True,
         summary_grads=False,
         summary_weights=False,
