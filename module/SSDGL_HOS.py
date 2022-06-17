@@ -221,9 +221,9 @@ def downsample2x(in_channel, out_channel):
     )
 
 @registry.MODEL.register('SSDGL_HOS')
-class SSDGL(CVModule):
+class SSDGL_HOS(CVModule):
     def __init__(self, config):
-        super(SSDGL, self).__init__(config)
+        super(SSDGL_HOS, self).__init__(config)
         r = int(8* self.config.reduction_ratio)
         block1_channels = int(self.config.block_channels[0] * self.config.reduction_ratio / r) * r
         block2_channels = int(self.config.block_channels[1] * self.config.reduction_ratio / r) * r
