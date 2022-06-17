@@ -4,7 +4,10 @@ from simplecv.data.preprocess import divisible_pad
 import torch
 from torch.utils import data
 from random import shuffle
+from simplecv import dp_train as train
 SEED = 2333
+args = train.parser.parse_args()
+dataset_path=args.config_path
 
 class FullImageDataset_small(dataset.Dataset):
     def __init__(self,
@@ -65,7 +68,24 @@ class FullImageDataset_small(dataset.Dataset):
 
     @property
     def num_classes(self):
-        return 9
+        if dataset_path =="SSDGL.SSDGL_1_0_pavia" :
+            print("PU")
+            return 9
+        elif dataset_path =="SSDGL.SSDGL_1_0_pavia_small" :
+            print("PU")
+            return 9            
+        elif dataset_path =="SSDGL.SSDGL_1_0_Indianpine" :
+            print("IP")          
+            return 16   
+        elif dataset_path =="SSDGL.SSDGL_1_0_Indianpine_small" :
+            print("IP")          
+            return 16               
+        elif dataset_path =="SSDGL.SSDGL_1_0_HOS":
+            print("HOS")        
+            return 15
+        else:
+           print("redefine the number of class") 
+           sys.exit()                           
 
     def __getitem__(self, idx):
 
@@ -142,7 +162,18 @@ class FullImageDataset(dataset.Dataset):
 
     @property
     def num_classes(self):
-        return 16
+        if dataset_path =="SSDGL.SSDGL_1_0_pavia" :
+            print("PU")
+            return 9
+        elif dataset_path =="SSDGL.SSDGL_1_0_Indianpine"  :
+            print("IP")          
+            return 16   
+        elif dataset_path =="SSDGL.SSDGL_1_0_HOS":
+            print("HOS")        
+            return 15
+        else:
+           print("redefine the number of class") 
+           sys.exit() 
 
     def __getitem__(self, idx):
 
