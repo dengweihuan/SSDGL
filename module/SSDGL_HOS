@@ -153,8 +153,6 @@ class ChannelAttention(nn.Module):
         return y   
 
 
-
-
 class BasicBlock(nn.Module):
     expansion = 1
 
@@ -171,26 +169,7 @@ class BasicBlock(nn.Module):
         out = self.ca(x)+self.rate*self.sa(x)       
         return out
         
-'''
-class SEBlock(nn.Module):
-    def __init__(self, in_channels, reduction_ratio):
-        super(SEBlock, self).__init__()
-        self.gap = GlobalAvgPool2D()
-        self.seq = nn.Sequential(
-            nn.Linear(in_channels, in_channels // reduction_ratio),
-            nn.ReLU(inplace=True),
-            nn.Linear(in_channels // reduction_ratio, in_channels),
-            nn.Sigmoid()
-        )
-
-    def forward(self, x):
-        residual=x
-        v = self.gap(x)
-        score = self.seq(v.view(v.size(0), v.size(1)))
-        y = x * score.view(score.size(0), score.size(1), 1, 1)
-
-        return y    
-'''                    
+             
 def conv3x3_gn_relu(in_channel, out_channel, num_group):
     return nn.Sequential(
         nn.Conv2d(in_channel, out_channel, 3, 1, 1),
@@ -219,22 +198,7 @@ class SpatialAttention(nn.Module):
         y = x * out.view(1, 1, out.size(-2), out.size(-1))
         y = y + residual
         return y    
-'''
-def repeat_block(block_channel1, r, n):
-    cl_channel = block_channel1 / 8
-    cl_channel = int(cl_channel)
-    cl2_channel = int(cl_channel / 2)
-    gn_a = int(block_channel1 / 2)
-    layers = [
-        nn.Sequential(
 
-            conv3x3_gn_relu(block_channel1, block_channel1, r),
-            ChannelAttention(block_channel1),
-            nn.GroupNorm(r, block_channel1),
-            nn.ReLU(inplace=True),
-            )]
-    return nn.Sequential(*layers)
-'''
 def repeat_block(block_channel1, r, n):
     cl_channel = block_channel1 / 8
     cl_channel = int(cl_channel)
@@ -256,21 +220,7 @@ def downsample2x(in_channel, out_channel):
         nn.ReLU(inplace=True)
     )
 
-
-
-'''
-
-def repeat_block(block_channel, r, n):
-    layers = [
-        nn.Sequential(
-            SEBlock(block_channel, r),
-            conv3x3_gn_relu(block_channel, block_channel, r)
-        )
-        for _ in range(n)]
-    return nn.Sequential(*layers)
-'''    
-
-@registry.MODEL.register('SSDGL')
+@registry.MODEL.register('SSDGL_HOS')
 class SSDGL(CVModule):
     def __init__(self, config):
         super(SSDGL, self).__init__(config)
@@ -279,7 +229,6 @@ class SSDGL(CVModule):
         block2_channels = int(self.config.block_channels[1] * self.config.reduction_ratio / r) * r
         block3_channels = int(self.config.block_channels[2] * self.config.reduction_ratio / r) * r
         block4_channels = int(self.config.block_channels[3] * self.config.reduction_ratio / r) * r
-        #self.rl=nn.ReLU(inplace=True)
         self.gn=nn.GroupNorm(16, 144)
         self.rl=nn.ReLU(inplace=False) 
         self.feature_ops = nn.ModuleList([
@@ -326,11 +275,6 @@ class SSDGL(CVModule):
         return lateral + top2x
 
     def forward(self, x, y=None, w=None, **kwargs):
-        #y_kan=y.flatten()
-        #print(y.shape)
-        #print(sadpe)
-        #rl=nn.ReLU(inplace=True) 
-        #residual=rl(x) 
         residual=x
         feat_list = []
         for op in self.feature_ops:
@@ -349,7 +293,6 @@ class SSDGL(CVModule):
 
         final_feat = out_feat_list[-1]
         
-        #l1=abs(final_feat-residual)
         logit = self.cls_pred_conv(final_feat)
 
 
@@ -368,11 +311,8 @@ class SSDGL(CVModule):
         #print("y",y.shape)        
         losses = F.cross_entropy(x, y.long() - 1, weight=None,
                                  ignore_index=-1, reduction='none')
-        print("losses",losses.shape)
-        #gn=nn.GroupNorm(16, 144)
-        #rl=nn.ReLU(inplace=False) 
-        diff_feat_new=self.rl(diff_feat.cuda())       
-        #diff_feat_new=diff_feat.cuda()                      
+
+        diff_feat_new=self.rl(diff_feat.cuda())                       
         l1=F.mse_loss(diff_feat_new.cuda(),x_origin.cuda())
         v = losses.mul_(weight).sum() / weight.sum()
         v=v+0.1*l1
