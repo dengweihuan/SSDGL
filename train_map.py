@@ -3,6 +3,7 @@ import torch
 from simplecv.util.logger import eval_progress, speed
 import time
 from module import SSDGL
+from module import SSDGL_HOS
 from simplecv.util import metric
 from simplecv.util import registry
 from torch.utils.data.dataloader import DataLoader
